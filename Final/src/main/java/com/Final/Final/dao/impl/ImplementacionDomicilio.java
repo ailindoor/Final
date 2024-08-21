@@ -1,4 +1,4 @@
-package com.Final.Final.dao.implementacion;
+package com.Final.Final.dao.impl;
 
 import com.Final.Final.dao.BD;
 import com.Final.Final.dao.IDAO;
@@ -87,12 +87,57 @@ public class ImplementacionDomicilio implements IDAO<Domicilio> {
 
     @Override
     public Domicilio actualizar(Domicilio domicilio) {
-        return null;
+        Connection connection = null;
+
+        try {
+            connection = BD.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE DOMICILIOS SET CALLE=?,NUMERO=?,LOCALIDAD=?,PROVINCIA=?"
+            );
+
+            preparedStatement.setString(1,domicilio.getCalle());
+            preparedStatement.setInt(2,domicilio.getNumero());
+            preparedStatement.setString(3,domicilio.getLocalidad());
+            preparedStatement.setString(4,domicilio.getProvincia());
+
+            preparedStatement.execute();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return domicilio;
     }
 
     @Override
     public void eliminarPorId(Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
 
+        try {
+            connection = BD.getConnection();
+
+                preparedStatement = connection.prepareStatement("DELETE DOMICILIOS WHERE ID=?");
+            preparedStatement.setInt(1,id);
+
+            preparedStatement.execute();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

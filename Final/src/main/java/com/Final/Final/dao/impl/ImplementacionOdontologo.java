@@ -1,4 +1,4 @@
-package com.Final.Final.dao.implementacion;
+package com.Final.Final.dao.impl;
 
 import com.Final.Final.dao.BD;
 import com.Final.Final.dao.IDAO;
