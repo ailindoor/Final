@@ -1,12 +1,12 @@
-package com.Final.Final.dao.implementacion;
+package com.Final.Final.dao.impl;
 
 import com.Final.Final.dao.BD;
 import com.Final.Final.dao.IDAO;
+import com.Final.Final.modelo.Domicilio;
 import com.Final.Final.modelo.Paciente;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,26 +14,29 @@ public class ImplementacionPaciente implements IDAO<Paciente> {
 
     private static final org.apache.log4j.Logger LOGGER = Logger.getLogger(ImplementacionPaciente.class);
 
+    ImplementacionDomicilio implementacionDomicilio = new ImplementacionDomicilio();
     @Override
     public Paciente guardar(Paciente paciente) {
         Connection connection = null;
 
         try {
+            implementacionDomicilio.guardar(paciente.getDomicilio());
+
             LOGGER.info("Guardando un paciente");
 
             connection = BD.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO PACIENTES (" +
-                            "NOMBRE, APELLIDO, DOMICILIO, DNI, FECHA_ALTA) VALUES " +
+                            "NOMBRE, APELLIDO, DNI, FECHA_ALTA, DOMICILIO_ID) VALUES " +
                             "(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
             preparedStatement.setString(1, paciente.getNombre());
             preparedStatement.setString(2, paciente.getApellido());
-            preparedStatement.setString(3, paciente.getDomicilio());
-            preparedStatement.setString(4, paciente.getDni());
-            preparedStatement.setDate(5, Date.valueOf(paciente.getFechaAlta()));
+            preparedStatement.setString(3, paciente.getDni());
+            preparedStatement.setDate(4, Date.valueOf(paciente.getFechaAlta()));
+            preparedStatement.setInt(5, paciente.getDomicilio().getId());
 
             preparedStatement.execute();
 
@@ -77,13 +80,11 @@ public class ImplementacionPaciente implements IDAO<Paciente> {
            ResultSet rs = psBuscarPorId.executeQuery();
 
            while(rs.next()){
-               paciente = new Paciente();
-               paciente.setId(rs.getInt(1));
-               paciente.setNombre(rs.getString(2));
-               paciente.setApellido(rs.getString(3));
-               paciente.setDni(rs.getString(4));
-               paciente.setDomicilio(rs.getString(5));
-               paciente.setFechaAlta(rs.getDate(6).toLocalDate());
+               Domicilio domicilio = implementacionDomicilio.consultarPorId(rs.getInt(6));
+
+               paciente = new Paciente(rs.getInt(1), rs.getString(2),
+                       rs.getString(3), rs.getString(4),
+                       rs.getDate(5).toLocalDate(), domicilio);
 
            }
 
@@ -105,19 +106,21 @@ public class ImplementacionPaciente implements IDAO<Paciente> {
         Connection connection = null;
 
         try {
+            implementacionDomicilio.guardar(paciente.getDomicilio());
+
             connection = BD.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE PACIENTES SET NOMBRE=?, APELLIDO=?, DOMICILIO=?," +
-                            "DNI=?, FECHA_ALTA=? WHERE ID=?"
+                    "UPDATE PACIENTES SET NOMBRE=?, APELLIDO=?," +
+                            "DNI=?, FECHA_ALTA=?, DOMICILIO=? WHERE ID=?"
             );
 
             preparedStatement.setString(1,paciente.getNombre());
             preparedStatement.setString(2,paciente.getApellido());
-            preparedStatement.setString(3, paciente.getDomicilio());
-            preparedStatement.setString(4, paciente.getDni());
-            preparedStatement.setDate(5, Date.valueOf(paciente.getFechaAlta()));
-            preparedStatement.setInt(6, paciente.getId());
+            preparedStatement.setString(3, paciente.getDni());
+            preparedStatement.setDate(4, Date.valueOf(paciente.getFechaAlta()));
+            preparedStatement.setInt(5, paciente.getId());
+            preparedStatement.setInt(6, paciente.getDomicilio().getId());
 
             preparedStatement.execute();
 
@@ -178,13 +181,13 @@ public class ImplementacionPaciente implements IDAO<Paciente> {
             ResultSet rs = preparedStatement.executeQuery();
 
             while(rs.next()) {
+                Domicilio domicilio = implementacionDomicilio.consultarPorId(rs.getInt(6));
+
                 paciente = new Paciente(rs.getInt(1), rs.getString(2),
-                        rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getDate(6).toLocalDate());
+                        rs.getString(3), rs.getString(4),
+                        rs.getDate(5).toLocalDate(), domicilio);
 
                 pacienteList.add(paciente);
-
-                System.out.println(paciente.toString());
             }
 
 
