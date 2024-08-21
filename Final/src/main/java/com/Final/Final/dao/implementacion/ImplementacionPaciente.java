@@ -137,7 +137,28 @@ public class ImplementacionPaciente implements IDAO<Paciente> {
 
     @Override
     public void eliminarPorId(Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
 
+        try {
+            connection = BD.getConnection();
+
+            preparedStatement = connection.prepareStatement("DELETE PACIENTES WHERE ID=?");
+            preparedStatement.setInt(1,id);
+
+            preparedStatement.execute();
+
+            System.out.println("El paciente con id= " + id + "ha sido eliminado");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

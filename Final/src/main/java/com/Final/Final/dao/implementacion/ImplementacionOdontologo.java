@@ -128,15 +128,36 @@ public class ImplementacionOdontologo implements IDAO<Odontologo> {
 
     @Override
     public void eliminarPorId(Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = BD.getConnection();
+
+            preparedStatement = connection.prepareStatement("DELETE ODONTOLOGOS WHERE ID=?");
+            preparedStatement.setInt(1,id);
+
+            preparedStatement.execute();
+
+            System.out.println("El odontologo con id= " + id + "ha sido eliminado");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                connection.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
 
     }
 
     @Override
     public List<Odontologo> listarTodos() {
         Connection connection = null;
-
-        List<Odontologo> odontologoList = new ArrayList<>();
         Odontologo odontologo = null;
+        List<Odontologo> odontologoList = new ArrayList<>();
 
         try {
             connection = BD.getConnection();
