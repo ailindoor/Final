@@ -1,14 +1,15 @@
-package com.Final.Final.servicio;
+package com.Final.Final.service;
 
-import com.Final.Final.modelo.Paciente;
+
+import com.Final.Final.entity.Paciente;
 
 import java.util.List;
 
 public interface IPacienteServicio {
 
     Paciente guardar(Paciente paciente);
-    Paciente buscarPorId(Integer id);
+    Paciente buscarPorId(Long id);
     void actualizar(Paciente paciente);
-    void elimanar(Integer id);
+    void elimanar(Long id);
     List<Paciente> listarTodos();
 }
