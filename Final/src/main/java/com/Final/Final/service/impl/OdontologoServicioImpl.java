@@ -1,6 +1,5 @@
 package com.Final.Final.service.impl;
 
-
 import com.Final.Final.entity.Odontologo;
 import com.Final.Final.repository.IOdontologoRepository;
 import com.Final.Final.service.IOdontologoServicio;
@@ -10,12 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class OdotologoServicioImpl implements IOdontologoServicio {
-
+public class OdontologoServicioImpl implements IOdontologoServicio {
     @Autowired
     private IOdontologoRepository iOdontologoRepository;
-
-
     @Override
     public Odontologo guardar(Odontologo odontologo) {
         return iOdontologoRepository.save(odontologo);
@@ -32,22 +28,17 @@ public class OdotologoServicioImpl implements IOdontologoServicio {
     }
 
     @Override
-    public void actulizar(Odontologo odontologo) {
-        iOdontologoRepository.save(odontologo);
-    }
-
-    @Override
     public void eliminar(Long id) {
         iOdontologoRepository.deleteById(id);
     }
 
     @Override
-    public List<Odontologo> listarTodos() {
-        return iOdontologoRepository.findAll();
+    public void actualizar(Odontologo odontologo) {
+        iOdontologoRepository.save(odontologo);
     }
 
     @Override
-    public Odontologo buscarPorMatricula(String matricula) {
-        return iOdontologoRepository.findByMatricula(matricula);
+    public List<Odontologo> listarTodos() {
+        return iOdontologoRepository.findAll();
     }
 }

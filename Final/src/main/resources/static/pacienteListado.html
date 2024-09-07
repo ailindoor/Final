@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Paciente</title>
+    <link rel="icon" href="img/icono.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d9ee20a0aa.js" crossorigin="anonymous"></script>
+</head>
+<body style="background: #ededed;">
+<div class="card-header row" style="background: #056491; color: white;">
+    <a href="index.html" style="color: #ffffff; margin-left: 1rem; margin-top: 0.8rem;"><i class="fa-solid fa-arrow-left" style="font-size: 2rem;"></i></a>
+    <h1 style="margin-left: 1rem;">Sistema Reserva de Turnos</h1>
+</div>
+<br>
+<div class="container">
+    <h2>Listado Pacientes</h2>
+    <hr>
+    <div>
+        <a type="button" class="btn btn-success" style="font-size: 1.3rem; color: #ffffff" href="/pacienteCrear.html">Nuevo Paciente</a>
+    </div>
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Calle</th>
+            <th>Número Calle</th>
+            <th>Localidad</th>
+            <th>Provincia</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="paciente : ${pacinetes}">
+            <td th:text="${paciente.id}">1</td>
+            <td th:text="${paciente.nombre}">ejemplo</td>
+            <td th:text="${paciente.apellido}">ejemplo</td>
+            <td th:text="${paciente.dni}">ejemplo</td>
+            <td th:text="${paciente.calle}">ejemplo</td>
+            <td th:text="${paciente.numero}">ejemplo</td>
+            <td th:text="${paciente.localidad}">ejemplo</td>
+            <td th:text="${paciente.provincia}">ejemplo</td>
+            <td><a type="button" class="btn btn-primary" style="color: #ffffff;" href="pacienteActualizar.html"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+            <td><a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar" style="color: #ffffff;"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEliminarLabel">Confirmación de Eliminación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este paciente?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="eliminarOdontologo()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
