@@ -3,13 +3,13 @@ package com.Final.Final.service.impl;
 
 import com.Final.Final.entity.Paciente;
 import com.Final.Final.repository.IPacienteRepository;
-import com.Final.Final.service.IPacienteServicio;
+import com.Final.Final.service.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class PacienteServicioImpl implements IPacienteServicio {
+public class PacienteServiceImpl implements IPacienteService {
 
     @Autowired
     private IPacienteRepository iPacienteRepository;
@@ -17,7 +17,7 @@ public class PacienteServicioImpl implements IPacienteServicio {
 
     @Override
     public Paciente guardar(Paciente paciente) {
-        return iPacienteRepository.;
+        return iPacienteRepository.save(paciente);
     }
 
     @Override

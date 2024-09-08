@@ -3,14 +3,14 @@ package com.Final.Final.service.impl;
 
 import com.Final.Final.entity.Odontologo;
 import com.Final.Final.repository.IOdontologoRepository;
-import com.Final.Final.service.IOdontologoServicio;
+import com.Final.Final.service.IOdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 @Service
-public class OdotologoServicioImpl implements IOdontologoServicio {
+public class OdotologoServiceImpl implements IOdontologoService {
 
     @Autowired
     private IOdontologoRepository iOdontologoRepository;

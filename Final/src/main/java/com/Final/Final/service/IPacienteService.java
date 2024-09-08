@@ -5,7 +5,7 @@ import com.Final.Final.entity.Paciente;
 
 import java.util.List;
 
-public interface IPacienteServicio {
+public interface IPacienteService {
 
     Paciente guardar(Paciente paciente);
     Paciente buscarPorId(Long id);
