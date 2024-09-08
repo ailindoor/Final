@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Turnos</title>
@@ -36,14 +36,8 @@
             <th>Eliminar</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="turno : ${turnos}">
-            <td th:text="${turno.id}">1</td>
-            <td th:text="${turno.paciente}">ejemplo</td>
-            <td th:text="${turno.adontologo}">ejemplo</td>
-            <td th:text="${turno.fecha}">2024-09-12</td>
-            <td><a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar" style="color: #ffffff;"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-        </tr>
+        <tbody id="turnos-table-body">
+        <!-- Los turnos o el mensaje se agregarán dinámicamente aquí -->
         </tbody>
     </table>
 </div>
@@ -61,7 +55,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" onclick="eliminarTurno()">Eliminar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
             </div>
         </div>
     </div>
@@ -76,32 +70,54 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form th:action="@{/turnos/guardar}" th:object="${turno}" method="post">
+            <form id="formCrearTurno" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="paciente">Paciente</label>
-                        <select class="form-control" id="paciente" th:field="*{paciente.id}">
-                            <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nombre + ' ' + paciente.apellido}"></option>
+                        <label for="paciente">Seleccionar Paciente:</label>
+                        <select class="form-control" id="paciente" required>
+                            <option value="" disabled selected>Seleccione un paciente</option>
+                            <!-- Opciones se cargarán con AJAX -->
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="odontologo">Odontólogo</label>
-                        <select class="form-control" id="odontologo" th:field="*{odontologo.id}">
-                            <option th:each="odontologo : ${odontologos}" th:value="${odontologo.id}" th:text="${odontologo.nombre + ' ' + odontologo.apellido}"></option>
+                        <label for="odontologo">Seleccionar Odontólogo:</label>
+                        <select class="form-control" id="odontologo" required>
+                            <option value="" disabled selected>Seleccione un odontólogo</option>
+                            <!-- Opciones se cargarán con AJAX -->
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="fecha">Fecha del Turno</label>
-                        <input type="date" class="form-control" id="fecha" th:field="*{fecha}">
+                        <label for="fecha">Fecha del Turno:</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha" th:field="*{fecha}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar Turno</button>
+                    <button type="submit" class="btn btn-primary">Asignar Turno</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<!-- Modal de Notificación -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Notificación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Turno asignado exitosamente.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/get_post_datos_turno.js"></script>
 </body>
 </html>
