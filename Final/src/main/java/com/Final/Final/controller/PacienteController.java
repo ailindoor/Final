@@ -14,7 +14,7 @@ public class PacienteController {
     @Autowired
     private IPacienteServicio iPacienteServicio;
 
-    @GetMapping("/{id}")
+    @GetMapping("buscar/{id}")
     public ResponseEntity<Paciente> consultarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(iPacienteServicio.buscarPorId(id));
         //return "redirect:/pacientes";
@@ -31,11 +31,11 @@ public class PacienteController {
     public String actualizar(@PathVariable Long id, @RequestBody Paciente paciente){
         paciente.setId(id);
         iPacienteServicio.actualizar(paciente);
-        return "redirect:/pacientes";
+        return "ok";
     }
     @GetMapping("eliminar/{id}")
     public String eliminar(@PathVariable Long id){
         iPacienteServicio.eliminar(id);
-        return "redirect:/pacientes";
+        return "ok";
     }
 }

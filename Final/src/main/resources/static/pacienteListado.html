@@ -24,10 +24,10 @@
         <a type="button" class="btn btn-success" style="font-size: 1.3rem; color: #ffffff" href="/pacienteCrear.html">Nuevo Paciente</a>
     </div>
     <br>
-    <table class="table table-bordered table-striped">
+    <table id="pacientesTable" class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>ID</th>
+            <th style="display: none">N° Paciente</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>DNI</th>
@@ -35,23 +35,13 @@
             <th>Número Calle</th>
             <th>Localidad</th>
             <th>Provincia</th>
+            <th>Fecha Alta</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="paciente : ${pacinetes}">
-            <td th:text="${paciente.id}">1</td>
-            <td th:text="${paciente.nombre}">ejemplo</td>
-            <td th:text="${paciente.apellido}">ejemplo</td>
-            <td th:text="${paciente.dni}">ejemplo</td>
-            <td th:text="${paciente.calle}">ejemplo</td>
-            <td th:text="${paciente.numero}">ejemplo</td>
-            <td th:text="${paciente.localidad}">ejemplo</td>
-            <td th:text="${paciente.provincia}">ejemplo</td>
-            <td><a type="button" class="btn btn-primary" style="color: #ffffff;" href="pacienteActualizar.html"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
-            <td><a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar" style="color: #ffffff;"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-        </tr>
+        <!-- Se llenará dinámicamente con JavaScript -->
         </tbody>
     </table>
 </div>
@@ -69,10 +59,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" onclick="eliminarOdontologo()">Eliminar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/get_pacientes.js"></script>
 </body>
 </html>
