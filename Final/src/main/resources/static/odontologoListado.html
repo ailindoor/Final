@@ -24,10 +24,10 @@
         <a type="button" class="btn btn-success" style=" font-size: 1.3rem; color: #ffffff" href="/odontologoCrear.html">Nuevo Odontólogo</a>
     </div>
     <br>
-    <table class="table table-bordered table-striped">
+    <table id="odontologosTable" class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>ID</th>
+            <th style="display: none">ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Matrícula</th>
@@ -36,14 +36,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="odontologo : ${odontologos}">
-            <td th:text="${odontologo.id}">1</td>
-            <td th:text="${odontologo.nombre}">ejemplo</td>
-            <td th:text="${odontologo.apellido}">ejemplo</td>
-            <td th:text="${odontologo.matricula}">ejemplo</td>
-            <td><a type="button" class="btn btn-primary" style="color: #ffffff;" href="odontologoActualizar.html"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
-            <td><a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar" style="color: #ffffff;"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-        </tr>
+        <!-- Los datos se llenarán dinámicamente con JavaScript -->
         </tbody>
     </table>
 </div>
@@ -61,10 +54,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" onclick="eliminarOdontologo()">Eliminar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/get_odontologos.js"></script>
 </body>
 </html>

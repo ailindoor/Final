@@ -110,7 +110,7 @@ $.ajax({
                     obtenerTurnos();
                 },
                 error: function () {
-                    alert('Se produjo un error al asignar el turno.');
+                    console.log('Se produjo un error al asignar el turno.');
                 }
             });
         });

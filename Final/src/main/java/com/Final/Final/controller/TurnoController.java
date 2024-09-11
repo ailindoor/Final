@@ -21,7 +21,6 @@ public class TurnoController {
     private ITurnoServicio iTurnoServicio;
     @Autowired
     private IOdontologoServicio iOdontologoService;
-
     @Autowired
     private IPacienteServicio iPacienteService;
 

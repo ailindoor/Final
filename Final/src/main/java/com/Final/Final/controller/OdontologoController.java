@@ -32,11 +32,11 @@ public class OdontologoController {
     public String actualizar(@PathVariable Long id, @RequestBody Odontologo odontologo){
         odontologo.setId(id);
         odontologoServicio.actualizar(odontologo);
-        return "redirect:/odontologos";
+        return "ok";
     }
     @GetMapping("eliminar/{id}")
     public String eliminar(@PathVariable Long id){
         odontologoServicio.eliminar(id);
-        return "redirect:/odontologos";
+        return "ok";
     }
 }
