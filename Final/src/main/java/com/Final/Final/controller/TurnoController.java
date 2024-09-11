@@ -3,6 +3,7 @@ package com.Final.Final.controller;
 import com.Final.Final.entity.Odontologo;
 import com.Final.Final.entity.Paciente;
 import com.Final.Final.entity.Turno;
+import com.Final.Final.exeption.InvalidDateException;
 import com.Final.Final.service.IOdontologoServicio;
 import com.Final.Final.service.IPacienteServicio;
 import com.Final.Final.service.ITurnoServicio;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class TurnoController {
     public ResponseEntity<List<Turno>> listarTodos() {
         return ResponseEntity.ok(iTurnoServicio.listarTodos());
     }
-    @GetMapping("eliminar/{id}")
+    @DeleteMapping("eliminar/{id}")
     public String eliminar(@PathVariable Long id){
         iTurnoServicio.eliminar(id);
         return "ok";

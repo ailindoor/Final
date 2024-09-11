@@ -1,9 +1,9 @@
-// Función para obtener los parámetros de la URL
+
 function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
 }
- // Cargar los datos del paciente
+
         $(document).ready(function() {
             const id = getQueryParam('id');
             if (id) {
@@ -28,7 +28,6 @@ function getQueryParam(param) {
             }
         });
 
-  // Manejar el envío del formulario actualizar odontologo
          $('#pacienteForm').on('submit', function(event) {
              event.preventDefault();
              let id = $('#id').val();
@@ -52,7 +51,7 @@ function getQueryParam(param) {
                  contentType: 'application/json',
                  data: JSON.stringify(paciente),
                  success: function() {
-                     window.location.href = '/pacienteListado.html'; // Redirigir a la lista de pacientes
+                     window.location.href = '/pacienteListado.html';
                       $('#successModalPas').modal('show');
                  },
                  error: function() {

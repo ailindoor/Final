@@ -1,10 +1,9 @@
-// Función para obtener los parámetros de la URL
+
 function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
 }
 
-// Manejar el envío del formulario agregar paciente
          $('#pacienteForm').on('submit', function(event) {
              event.preventDefault();
              let paciente = {
@@ -27,7 +26,7 @@ function getQueryParam(param) {
                  data: JSON.stringify(paciente),
                  success: function() {
                      $('#successModalPas').modal('show');
-                     window.location.href = '/pacienteListado.html'; // Redirigir a la lista de odontólogos
+                     window.location.href = '/pacienteListado.html';
                  },
                  error: function() {
                      console.log('Error al agregar los datos.');

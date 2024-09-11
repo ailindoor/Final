@@ -33,7 +33,7 @@ public class PacienteController {
         iPacienteServicio.actualizar(paciente);
         return "ok";
     }
-    @GetMapping("eliminar/{id}")
+    @DeleteMapping("eliminar/{id}")
     public String eliminar(@PathVariable Long id){
         iPacienteServicio.eliminar(id);
         return "ok";

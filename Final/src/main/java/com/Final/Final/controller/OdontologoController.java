@@ -34,7 +34,7 @@ public class OdontologoController {
         odontologoServicio.actualizar(odontologo);
         return "ok";
     }
-    @GetMapping("eliminar/{id}")
+    @DeleteMapping("eliminar/{id}")
     public String eliminar(@PathVariable Long id){
         odontologoServicio.eliminar(id);
         return "ok";

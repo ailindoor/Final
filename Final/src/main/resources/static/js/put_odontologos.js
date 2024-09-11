@@ -1,9 +1,9 @@
-// Función para obtener los parámetros de la URL
+
 function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
 }
- // Cargar los datos del odontólogo
+
         $(document).ready(function() {
             const id = getQueryParam('id');
             if (id) {
@@ -23,7 +23,7 @@ function getQueryParam(param) {
             }
         });
 
-  // Manejar el envío del formulario actualizar odontologo
+
          $('#odontologoForm').on('submit', function(event) {
              event.preventDefault();
              let id = $('#id').val();

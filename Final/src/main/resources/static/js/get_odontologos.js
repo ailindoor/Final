@@ -2,15 +2,15 @@ let odontologoIdToDelete = null;
 
 function obtenerOdontologos() {
 $.ajax({
-                url: '/odontologos', // URL del endpoint para obtener los odontologos
+                url: '/odontologos',
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     let tableBody = $('#odontologosTable tbody');
-                    tableBody.empty(); // Limpiar la tabla
+                    tableBody.empty();
 
                     if (data.length === 0) {
-                        // Si no existen odontologos
+
                         tableBody.append(`
                              <tr>
                                  <td colspan="6" class="text-center">No existen odontólogos disponibles</td>
@@ -42,27 +42,27 @@ $.ajax({
  }
 
 function confirmarEliminacion(id) {
-    odontologoIdToDelete = id; // Guardamos el ID del odontólogo a eliminar
-    $('#modalEliminar').modal('show'); // Mostrar modal de confirmación
+    odontologoIdToDelete = id;
+    $('#modalEliminar').modal('show');
 }
 $('#confirmDeleteButton').on('click', function() {
-    eliminarOdontologo(odontologoIdToDelete); // Llamar la función para eliminar
-    $('#modalEliminar').modal('hide'); // Ocultar modal después de eliminar
+    eliminarOdontologo(odontologoIdToDelete);
+    $('#modalEliminar').modal('hide');
 });
 function eliminarOdontologo(id) {
     $.ajax({
         url: `/odontologos/eliminar/${id}`,
-        type: 'GET',
+        type: 'DELETE',
         success: function() {
             console.log('Odontólogo eliminado correctamente.');
-            obtenerOdontologos(); // Recargar la tabla de odontólogos después de eliminar
+            obtenerOdontologos();
         },
         error: function() {
             console.log('Error al eliminar el odontólogo.');
         }
     });
 }
-  // Llamar a la función para obtener y mostrar los odontologos
+
           $(document).ready(function() {
               obtenerOdontologos();
           });
