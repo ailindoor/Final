@@ -16,8 +16,8 @@ public class GlobalException {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DatabaseConnectionException.class)
-    public ResponseEntity<String> handleDatabaseConnectionException(DatabaseConnectionException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleDatabaseConnectionException(ResourceNotFoundException ex) {
         // Retorna un mensaje de error con un estado HTTP adecuado
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -45,7 +45,7 @@ class OdontologoServicioImplTest {
     public void testListarTodos() {
         // Arrange
         Odontologo juan = new Odontologo(1L, "Juan", "wer", "121");
-        Odontologo andre = new Odontologo(2L, "Andre", "iso", "121");
+        Odontologo andre = new Odontologo(2L,"Andre", "iso", "121");
         when(iOdontologoRepository.findAll()).thenReturn(Arrays.asList(juan, andre));
 
         // Act

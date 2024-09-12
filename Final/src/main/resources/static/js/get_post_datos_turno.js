@@ -118,7 +118,7 @@ $.ajax({
   function eliminarTurno(id) {
               $.ajax({
                   url: `/turnos/eliminar/${id}`,
-                  type: 'GET',
+                  type: 'DELETE',
                   success: function() {
                       obtenerTurnos();
                   },
