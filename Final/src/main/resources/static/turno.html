@@ -33,6 +33,7 @@
             <th>Paciente</th>
             <th>Odontólogo</th>
             <th>Fecha</th>
+            <th>Hora</th>
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -89,6 +90,10 @@
                     <div class="form-group">
                         <label for="fecha">Fecha del Turno:</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" th:field="*{fecha}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hora">Hora del Turno:</label>
+                        <input type="time" class="form-control" id="hora" name="hora" th:field="*{hora}" required>
                     </div>
                 </div>
                 <div class="modal-footer">

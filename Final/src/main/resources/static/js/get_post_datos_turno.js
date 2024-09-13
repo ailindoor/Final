@@ -35,6 +35,8 @@ $.ajax({
                             const fechaCell = $('<td></td>').text(turno.fecha);
                             row.append(fechaCell);
 
+                            const horaCell = $('<td></td>').text(turno.hora);
+                            row.append(horaCell);
 
                             const eliminarCell = $('<td></td>');
                             const eliminarBtn = $('<a type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalEliminar" style="color: #ffffff;"><i class="fa-sharp fa-solid fa-trash"></i></a>').addClass('btn btn-danger');
@@ -93,6 +95,7 @@ $.ajax({
             const odontologoId = $('#odontologo').val();
             const pacienteId = $('#paciente').val();
             const fechaTurno = $('#fecha').val();
+            const horaTurno = $('#hora').val();
 
 
             $.ajax({
@@ -102,7 +105,8 @@ $.ajax({
                 data: JSON.stringify({
                     paciente: { id: pacienteId },
                     odontologo: { id: odontologoId },
-                    fecha: fechaTurno
+                    fecha: fechaTurno,
+                    hora: horaTurno
                 }),
                 success: function (response) {
                     $('#successModal').modal('show');

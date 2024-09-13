@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "turnos")
@@ -20,6 +22,15 @@ public class Turno {
     @ManyToOne
     private Odontologo odontologo;
     private LocalDate fecha;
+    private LocalTime hora;
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
 
     public Long getId() {
         return id;

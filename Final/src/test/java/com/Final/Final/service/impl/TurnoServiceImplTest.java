@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +38,7 @@ class TurnoServiceImplTest {
         Odontologo camilo = new Odontologo(1L, "CAMILO", "CARRILLO","12121");
         Domicilio domicilio = new Domicilio(1L,"romano",2,"laRosa","Arma");
         Paciente juan = new Paciente(1L, "Juan", "Dos","123", LocalDate.parse("2024-12-23"),domicilio,new HashSet<>(1));
-        Turno turno = new Turno(1L,juan,camilo,LocalDate.parse("2024-12-23"));
+        Turno turno = new Turno(1L,juan,camilo,LocalDate.parse("2024-12-23"), LocalTime.of(04,30));
         when(iTurnoRepository.save(turno)).thenReturn(turno);
 
         // Act
